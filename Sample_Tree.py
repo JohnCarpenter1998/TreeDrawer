@@ -1,5 +1,5 @@
 import turtle as t
-# I am here
+
 screen = t.Screen()
 t.teleport(0,-300)
 t.left(90)
