@@ -9,8 +9,6 @@ intialBranchLength = 100
 speed = 0
 intialAngle = (splitCount - 1) / 2 * branchAngle
 
-turtleAngle = 0
-
 screen = t.Screen()
 t.teleport(0,-300)
 t.left(90)
@@ -18,21 +16,20 @@ t.forward(intialBranchLength)
 t.speed(speed)
 
 def rotateTurtle(angle):
-	global turtleAngle
 	t.right(angle)
-	turtleAngle += angle
+	return angle
 
 def drawTree(RemainingHeight, branchLength):
+	turtleAngle = 0
 	if RemainingHeight == 0:
 		return
-	rotateTurtle(-intialAngle)
+	turtleAngle += rotateTurtle(-intialAngle)
 	for i in range(splitCount):
 		t.forward(branchLength)
 		drawTree(RemainingHeight - 1, branchLength * trunkRatio)
 		t.backward(branchLength)
-		rotateTurtle(branchAngle)
-	rotateTurtle(-branchAngle)
-	rotateTurtle(-intialAngle)
+		turtleAngle += rotateTurtle(branchAngle)
+	turtleAngle += rotateTurtle(-turtleAngle)
 
 
 drawTree(treeHeight - 1, trunkRatio * intialBranchLength)
