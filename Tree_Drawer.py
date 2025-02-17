@@ -1,4 +1,5 @@
 import turtle as t
+import random
 
 splitCount = int(input("How many splits per branch?"))
 branchAngle = int(input("What's the angle between branches?"))
@@ -19,16 +20,22 @@ def rotateTurtle(angle):
 	t.right(angle)
 	return angle
 
+def randonizeAngle(angle):
+	angle = angle + int (randomness * 2 * random.random()) - randomness
+	return angle
+
 def drawTree(RemainingHeight, branchLength):
 	turtleAngle = 0
 	if RemainingHeight == 0:
 		return
-	turtleAngle += rotateTurtle(-intialAngle)
+	nextAngle = randonizeAngle(-intialAngle)
+	turtleAngle += rotateTurtle(nextAngle)
 	for i in range(splitCount):
 		t.forward(branchLength)
 		drawTree(RemainingHeight - 1, branchLength * trunkRatio)
 		t.backward(branchLength)
-		turtleAngle += rotateTurtle(branchAngle)
+		nextAngle = randonizeAngle(branchAngle)
+		turtleAngle += rotateTurtle(nextAngle)
 	turtleAngle += rotateTurtle(-turtleAngle)
 
 
