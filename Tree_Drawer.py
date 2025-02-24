@@ -9,6 +9,7 @@ thicknessRatio = float(input("What is the ratio between Branch Thickness?"))
 intialBranchLength = int(input("What is the intial Branch Length?"))
 intialBranchThickness = int(input("What is the intial Branch Thickness?"))
 randomness = int(input("How much Randomness?"))
+colorOn = bool(input("Do you Want color?"))
 
 speed = 0
 intialAngle = (splitCount - 1) / 2 * branchAngle
@@ -17,6 +18,9 @@ screen = t.Screen()
 t.teleport(0,-300)
 t.left(90)
 t.width(intialBranchThickness)
+if colorOn:
+	t.colormode(255)
+	t.pencolor(int(random.random()* 256),int(random.random()* 256),int(random.random()* 256))
 t.forward(intialBranchLength)
 t.speed(speed)
 
